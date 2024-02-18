@@ -40,7 +40,7 @@ public class HandlerImpl implements Handler {
             Runnable sendTask = () -> {
                 Result res = client.sendData(consumer, chunk.payload());
                 int retries = RETRY_TIMES;
-                while (res == REJECTED && (retries == -1 || retries > 0)) {
+                while (res == REJECTED && (RETRY_TIMES == -1 || retries > 0)) {
                     try {
                         retries--;
                         TimeUnit.MILLISECONDS.sleep(timeout().toMillis()); // Это сильно напрягает. Но первый вариант - так.
